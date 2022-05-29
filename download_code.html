@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<!--
+	Solid State by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>SciBookTra - 科学书籍翻译</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+<body>
+<script src="assets/js/psw.js"></script><!--密码定义在 psw.js 里面-->
+<script>
+	function password() {		
+		var testV = 1;//计数器，记录密码错误次数
+		var psw = prompt("请输入密码：(没密码？无法下载)","");
+		while (testV < 3) {
+			if (!psw){
+				history.go(-1);//密码错误返回上一页
+			}
+			if (psw == xx) {
+				location.href="download_code_uowp.html";//密码正确，跳到指定页面
+				break;
+			}
+			testV+=1;
+			psw=prompt("请输入密码：(没密码？无法下载)","");
+		}
+		if (psw!=xx && testV ==3){
+			alert("请输入密码：(没密码？无法下载)");//密码输入错误达到3次
+		}
+			return " ";
+	}
+	
+	password();
+
+</script>
+</body>
+</html>

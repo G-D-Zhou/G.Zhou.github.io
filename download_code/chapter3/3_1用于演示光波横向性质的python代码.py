@@ -19,10 +19,19 @@ class Arrow3D(FancyArrowPatch):
         FancyArrowPatch.__init__(self, (0,0), (0,0), *args,\
                                  **kwargs) 
         self._verts3d = xs, ys, zs
+        
+    def do_3d_projection(self, renderer=None):
+        xs3d, ys3d, zs3d = self._verts3d
+        xs, ys, zs = proj3d.proj_transform(xs3d, ys3d,\
+                                           zs3d, self.axes.M)
+        self.set_positions((xs[0],ys[0]),(xs[1],ys[1]))
+
+        return np.min(zs)
+
     def draw(self, renderer):
         xs3d, ys3d, zs3d = self._verts3d
         xs, ys, zs = proj3d.proj_transform(xs3d, ys3d, zs3d,\
-                                           renderer.M)
+                                            self.axes.M)
         self.set_positions((xs[0],ys[0]),(xs[1],ys[1]))
         FancyArrowPatch.draw(self, renderer)
 
@@ -58,12 +67,12 @@ yv = np.sin(xv)
 zv = np.zeros(xv.size) 
 for i in range(len(xv)):
     a = Arrow3D([xv[i], xv[i]], [0 ,-yv[i]*1.76], [0,0],\
-         mutation_scale = 10, lw=2, arrowstyle="-|>",\
-                                 ls='dashed', color='b')
+          mutation_scale = 10, lw=2, arrowstyle="-|>",\
+                                  ls='dashed', color='b')
     ax.add_artist(a)
     b = Arrow3D([xv[i], xv[i]], [0,0], [0,yv[i]],\
-         mutation_scale=10, lw=2, arrowstyle="-|>",\
-                                 ls='dotted', color='r')
+          mutation_scale=10, lw=2, arrowstyle="-|>",\
+                                  ls='dotted', color='r')
     ax.add_artist(b)
 
 # 绘制矢量k
